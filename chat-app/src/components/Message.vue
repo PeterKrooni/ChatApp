@@ -54,6 +54,11 @@ export default{
 </script>
 
 <style scoped>
+@media screen and (min-width: 1080px){
+    #container{
+        width: 70em;
+    }
+}    
 #container{
     background-color: rgb(235, 235, 235);
     border-radius: 2%;
@@ -62,6 +67,7 @@ export default{
     align-items: center;
     transition-duration: 100ms;
 }
+
 #content-container{
     display: flex;
     align-items: center;

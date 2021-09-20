@@ -63,6 +63,8 @@ export default{
   color: #2c3e50;
 }
 #test-container{
-  width: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 </style>
