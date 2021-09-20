@@ -1,14 +1,6 @@
 <template>
   <div class="home">
   </div>
+  <router-link to="/chat">Go to Chat</router-link>
 </template>
 
-<script>
-// @ is an alias to /src
-
-export default {
-  name: 'Home',
-  components: {
-  }
-}
-</script>
