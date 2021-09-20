@@ -1,9 +1,9 @@
 <template>
-    <div id="container">
+    <div id="container" :style="menuIsOpen ? 'background-color: rgb(230, 230, 230)' : ''">
         <div id="content-container">
             <img :src='ProfilePicture' alt="">
-            <h3>{{Sender}}:</h3>
-            <h4>{{Message}}</h4>       
+            <h5>{{Sender}}:</h5>
+            <p>{{Message}}</p>       
         </div>
         
         <div id="options-container">
@@ -11,7 +11,7 @@
                 <i class="fas fa-pen" id="edit-icon"></i>
                 <i class="fas fa-trash-alt" id="delete-icon"></i>
             </div>
-            <i @click="toggleMessageOptions" :style="menuIsOpen ? 'opacity: 0.2' : 'opacity:0.6'" class="fas fa-ellipsis-v"></i>
+            <i @click="toggleMessageOptions" :style="menuIsOpen ? 'opacity: 0.2' : ''" class="fas fa-ellipsis-v"></i>
         </div>
     </div>
 </template>
@@ -37,6 +37,10 @@ export default{
             default: "https://i.redd.it/sc3sb84ao9o71.jpg",
             type: String
         },
+        MessageID: {
+            default: -1,
+            type: Number
+        },
     },
     methods: {
         toggleMessageOptions(){
@@ -56,6 +60,7 @@ export default{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition-duration: 100ms;
 }
 #content-container{
     display: flex;
@@ -81,19 +86,19 @@ export default{
 }
 img{
     margin: 1rem;
-    max-width: 4rem;
-    max-height: 6rem;
+    width: 3rem;
+    height: 2.5rem;
     border-radius: 100%;
     border: 2px solid rgb(199, 179, 179)
 }
-h3{
+h5{
     margin-right: 1rem;
-    font-size: 16px;
+    font-size: 18px;
     color: rgb(199, 179, 179);
     white-space: nowrap;
 }
-h4{
-    font-size: 16px;
+p{
+    font-size: 20px;
     margin-left: -10px;
     color: rgb(88, 88, 88)
 }
@@ -101,5 +106,6 @@ i{
     font-size: 20px;
     padding-right: 6%;
     opacity: 0.6;
+    transition-duration: 100ms;
 }
 </style>
