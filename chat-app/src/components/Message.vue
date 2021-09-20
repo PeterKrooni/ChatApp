@@ -76,6 +76,7 @@ export default{
     display: flex;
     align-items: center;
     justify-content: left;
+    overflow: hidden;
     width: 80%;
 }
 #options-container{
