@@ -8,8 +8,8 @@
         
         <div id="options-container">
             <div id="msg-options-container" v-if="menuIsOpen">
-                <i class="fas fa-pen" id="edit-icon"></i>
-                <i class="fas fa-trash-alt" id="delete-icon"></i>
+                <i @click="alertNoEditing" class="fas fa-pen" id="edit-icon"></i>
+                <i @click="$emit('delete-message', this.id)" class="fas fa-trash-alt" id="delete-icon"></i>
             </div>
             <i @click="toggleMessageOptions" :style="menuIsOpen ? 'opacity: 0.2' : ''" class="fas fa-ellipsis-v"></i>
         </div>
@@ -37,7 +37,7 @@ export default{
             default: "https://i.redd.it/sc3sb84ao9o71.jpg",
             type: String
         },
-        MessageID: {
+        id: {
             default: -1,
             type: Number
         },
@@ -48,8 +48,12 @@ export default{
         },
         created(){
           this.Sender = "Person mcPerson"  
-        }
+        },
+        alertNoEditing(){
+            alert("Editing messages is not supported yet.")
+        },
     },
+    emits: ['delete-message']
 }
 </script>
 

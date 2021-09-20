@@ -5,7 +5,8 @@
             :Sender="message.Sender"
             :Message="message.Message"
             :ProfilePicture="message.ProfilePicture"
-            :MessageID="message.MessageID"
+            :id="message.id"
+            @delete-message="$emit('delete-message', message.id)"
             />
         </div>
         <input @keypress="keymonitor" v-model="messagebox" type="text" placeholder="Send message...">

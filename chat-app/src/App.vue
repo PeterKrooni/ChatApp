@@ -1,7 +1,7 @@
 <template>
   <Header title="Chat App"/>
   <div id="test-container">
-  <ChatBox @new-message="newMessage" :messages='messages'/>
+  <ChatBox @new-message="newMessage" @delete-message="deleteMessage" :messages='messages'/>
 
   </div>
 </template>
@@ -24,32 +24,32 @@ export default{
       messages: []
     }
   },
-  created(){
-    // TODO: add json database to fetch data from
-    this.messages = [
-      {
-        MessageID: 1,
-        Message: "Lipsum",
-        Sender: "Test Sender"
-      },{
-        MessageID: 2,
-        Sender: "Test Sender"
-      },{
-        MessageID: 3,
-        Message: "Lipsum",
-      },{
-        MessageID: 4,
-      },
-    ]
-  },
   methods: {
-    newMessage(messagebox){
-      this.messages = [...this.messages, {
-          MessageID: 0, 
-          Message: messagebox,
-          Sender: "Undefined sender"
-          }]
-    }
+    async newMessage(messagebox){ 
+      const res = await fetch ('api/messages', {
+        method: "POST", 
+        headers:{
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify({"Message": messagebox, "Sender": "Test Sender", "ProfilePicture": "https://i.redd.it/sc3sb84ao9o71.jpg"})
+      })
+      const data = await res.json()
+      this.messages = [...this.messages, data]
+    },
+    async deleteMessage(id){
+      const res = await fetch(`api/messages/${id}`, {
+        method: "DELETE"
+      }) 
+      res.status === 200 ? (this.messages = this.messages.filter((message)=>message.id !== id)) : alert ("Error deleting message.")
+    },
+    async fetchMessages(){
+      const res = await fetch('api/messages')
+      const data = await res.json()
+      return data
+    },
+  },
+  async created(){
+    this.messages = await this.fetchMessages()
   }
 }
 </script>
